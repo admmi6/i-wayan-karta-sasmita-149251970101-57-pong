@@ -8,3 +8,7 @@ Project Ketiga - Pong Adding UI & Game Manager
 
 ![img pong ui main menu](img-pong-main-menu-ui.jpg "Pong UI Main Menu")
 ![img pong ui score](img-pong-game-ui-score.jpg "Pong UI Score")
+
+Project Keempat - Pong Seed Up
+
+![img pong speed up](img-pong-speed-up.jpg "Pong Speed Up")
