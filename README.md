@@ -7,3 +7,6 @@ Base gameplay
 
 Add UI Game Manager
 ![ponf ui manager](pong-ui-main-menu-game-manager-score.gif "Pong UI Manager")
+
+Adding speed up power up
+![pong speed up](pong-speed-up.gif "Adding speed up power up")
