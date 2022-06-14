@@ -12,13 +12,13 @@ public class GoalController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Debug.Log("isrig1: " + isRight);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+       // Debug.Log("isrig2: " + isRight);
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
@@ -33,6 +33,7 @@ public class GoalController : MonoBehaviour
             {
                 manager.AddLeftScore(1);
             }
+            Debug.Log("isrig3: " + isRight);
         }
     }
 }

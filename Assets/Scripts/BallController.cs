@@ -27,6 +27,7 @@ public class BallController : MonoBehaviour
 
         //ubah variabel speed vector2 menjadi vector2
         //transform.Translate(speed * Time.deltaTime);
+        //Debug.Log("Velocity: "+rig.velocity);
     }
 
     public void ResetBall()
@@ -37,5 +38,10 @@ public class BallController : MonoBehaviour
     public void ActiveSpeedUp(float magnitude)
     {
         rig.velocity *= magnitude;
+    }
+
+    public void ResetSpeed(float magnitude)
+    {
+        rig.velocity /= magnitude;
     }
 }

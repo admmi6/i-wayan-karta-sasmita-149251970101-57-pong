@@ -13,27 +13,51 @@ public class PowerUpManager : MonoBehaviour
     public Vector2 powerUpAreaMax;
 
     public int spawnInterval;
-    private float timer;
+    public int resetAllSpawnInterval;
+    private float timerDown;
+    private float timerReset;
+    
+    public float Timerreset
+    {
+        get
+        {
+            return this.timerReset;
+        }
+        set
+        {
+            this.timerReset = value;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         powerUpList = new List<GameObject>();
-        timer = 0;
-        Debug.Log("Timer" + timer);
+        timerDown = 0;
+        timerReset = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
+        timerDown += Time.deltaTime;
+        timerReset += Time.deltaTime;
 
-        if (timer > spawnInterval)
+        if (timerDown > spawnInterval)
         {
+            // generate power up setelah interval 3 detik
             GenerateRandomPowerUp();
-            timer -= spawnInterval;
+            timerDown -= spawnInterval;
         }
-        Debug.Log("Timer Up " + timer);
+        //Debug.Log("<color=green>Timer Up </color>" + timer);
+
+        //reset semua jika lebih dari 9 spawn interval
+        if (timerReset > resetAllSpawnInterval)
+        {
+            //hapus semua power up dan respawn
+            RemoveAllPowerUp();
+            timerReset -= resetAllSpawnInterval;
+        }
     }
 
     public void GenerateRandomPowerUp()
