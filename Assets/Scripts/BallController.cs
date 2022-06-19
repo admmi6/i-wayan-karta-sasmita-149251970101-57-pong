@@ -5,9 +5,7 @@ using UnityEngine;
 public class BallController : MonoBehaviour
 {
     public Vector2 speed;
-
     private Rigidbody2D rig;
-
     public Vector2 resetPosition;
 
     // Start is called before the first frame update
@@ -20,14 +18,7 @@ public class BallController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // bole bergerak ke kanan
-        // transform.position = transform.position + new Vector3(.1f, 0, 0) * Time.deltaTime;
-        // bole berpindah posisi
-        // transform.Translate(new Vector3(1f, 1f, 0) * Time.deltaTime);
-
-        //ubah variabel speed vector2 menjadi vector2
-        //transform.Translate(speed * Time.deltaTime);
-        //Debug.Log("Velocity: "+rig.velocity);
+      
     }
 
     public void ResetBall()

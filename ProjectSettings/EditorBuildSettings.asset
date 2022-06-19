@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PongGame.unity
     guid: 1eef193ede541df4480a03ebff7bb20e
+  - enabled: 1
+    path: Assets/Scenes/Credit.unity
+    guid: 93cdfb942dd6bdf42b258b03b28863e8
   m_configObjects: {}

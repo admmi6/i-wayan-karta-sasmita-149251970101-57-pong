@@ -4,32 +4,27 @@ using UnityEngine;
 
 public class SpeedUpController : MonoBehaviour
 {
-    public Collider2D bola;
+    
     public float magnitude;
+    public Collider2D bola;
     public PowerUpManager manager;
     public BallController bolaSpeed;
-
-    public Rigidbody2D bolarig;
+    public Rigidbody2D bolaRig;
 
     // Start is called before the first frame update
     void Start()
     {
-        // point disini
-        Debug.Log(bolarig.velocity);
-        if(bolarig.velocity.x > bolaSpeed.speed.x || bolarig.velocity.x < -bolaSpeed.speed.x)
+        // STARTIING POINT RESET ALL SPAWN DISINI
+        if(bolaRig.velocity.x > bolaSpeed.speed.x || bolaRig.velocity.x < -bolaSpeed.speed.x)
         {
             bola.GetComponent<BallController>().ResetSpeed(magnitude);
         }
-        //Debug.Log("Bola speed:" + bolaSpeed.speed);
-
     }
-
     // Update is called once per frame
     void Update()
     {
        
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision == bola)

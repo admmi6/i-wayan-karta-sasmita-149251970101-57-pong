@@ -1,70 +1,114 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
+using Unity.Collections;
 
 public class PowerUpManager : MonoBehaviour
 {
     public int maxJumlahPoweUp;
+
+    public PaddleController paddleLastHit;
+
+    // ball speed up
     private List<GameObject> powerUpList;
     public List<GameObject> powerUpTemplateList;
+    // paddle scale up
+    private List<GameObject> paddleScaleUpList;
+    public List<GameObject> paddleScaleUpTemplateList;
+    // paddle speed up
+    private List<GameObject> paddleSpeedUpList;
+    public List<GameObject> paddleSpeedUpTemplateList;
 
     public Transform spawnArea;
     public Vector2 powerUpAreaMin;
     public Vector2 powerUpAreaMax;
 
+    // reset time
+    //[HideInInspector]
     public int spawnInterval;
-    public int resetAllSpawnInterval;
-    private float timerDown;
-    private float timerReset;
-    
-    public float Timerreset
-    {
-        get
-        {
-            return this.timerReset;
-        }
-        set
-        {
-            this.timerReset = value;
-        }
-    }
+    private int resetAllSpawnInterval;
+    private float durationPaddle = 5f;
 
+    //timer
+    private float timerShowSpawn;
+    private float timerResetAllSpawn;
+    private float timerPaddle;
+    
     // Start is called before the first frame update
     void Start()
     {
         powerUpList = new List<GameObject>();
-        timerDown = 0;
-        timerReset = 0;
+        paddleScaleUpList = new List<GameObject>();
+        paddleSpeedUpList = new List<GameObject>();
+
+        timerShowSpawn = 0;
+        timerResetAllSpawn = 0;
+
+        resetAllSpawnInterval = spawnInterval * 3;
     }
 
     // Update is called once per frame
     void Update()
     {
-        timerDown += Time.deltaTime;
-        timerReset += Time.deltaTime;
+        // SPAWN INTERVAL
+        timerShowSpawn += Time.deltaTime;
+        timerResetAllSpawn += Time.deltaTime;
 
-        if (timerDown > spawnInterval)
+        if (timerShowSpawn > spawnInterval)
         {
-            // generate power up setelah interval 3 detik
             GenerateRandomPowerUp();
-            timerDown -= spawnInterval;
-        }
-        //Debug.Log("<color=green>Timer Up </color>" + timer);
 
-        //reset semua jika lebih dari 9 spawn interval
-        if (timerReset > resetAllSpawnInterval)
-        {
-            //hapus semua power up dan respawn
-            RemoveAllPowerUp();
-            timerReset -= resetAllSpawnInterval;
+            //GenerateRandomScaleUpPaddle();
+            //GenerateRandomSpeedUpPaddle();
+
+            timerShowSpawn -= spawnInterval;
         }
+
+        if (timerResetAllSpawn > resetAllSpawnInterval)
+        {
+            RemoveAllPowerUp();
+
+            //RemoveAllScaleUpPaddle();
+            //RemoveAllSpeedUpPaddle();
+
+            timerResetAllSpawn -= resetAllSpawnInterval;
+        }
+
+        if(paddleLastHit != null)
+        {
+            if (paddleLastHit.hasScaleUp == true)
+            {
+                timerPaddle += Time.deltaTime;
+                if (timerPaddle > durationPaddle)
+                {
+                    Debug.Log("HAS SCALE UP");
+                    paddleLastHit.SpeedDownPaddle();
+                    paddleLastHit.hasScaleUp = false;
+                    timerPaddle -= durationPaddle;
+                }
+            }
+
+            if(paddleLastHit.hasSpeedUp == true)
+            {
+                timerPaddle += Time.deltaTime;
+                if(timerPaddle > durationPaddle)
+                {
+                    Debug.Log("HAS SPEED UP");
+                    paddleLastHit.SpeedDownPaddle();
+                    paddleLastHit.hasSpeedUp = false;
+                    timerPaddle -= durationPaddle;
+                }
+            }
+        }
+
+
     }
 
     public void GenerateRandomPowerUp()
     {
         GenerateRandomPowerUp(new Vector2(Random.Range(powerUpAreaMin.x, powerUpAreaMax.x), Random.Range(powerUpAreaMin.y, powerUpAreaMax.y)));
     }
-
     public void GenerateRandomPowerUp(Vector2 position)
     {
         if (powerUpList.Count >= maxJumlahPoweUp)
@@ -72,10 +116,7 @@ public class PowerUpManager : MonoBehaviour
             return;
         }
 
-        if (position.x < powerUpAreaMin.x ||
-                position.x > powerUpAreaMax.x ||
-                position.y < powerUpAreaMin.y ||
-                position.y > powerUpAreaMax.y)
+        if (position.x < powerUpAreaMin.x || position.x > powerUpAreaMax.x || position.y < powerUpAreaMin.y || position.y > powerUpAreaMax.y)
         {
             return;
         }
@@ -85,13 +126,11 @@ public class PowerUpManager : MonoBehaviour
         powerUp.SetActive(true);
         powerUpList.Add(powerUp);
     }
-
     public void RemovePowerUp(GameObject powerUp)
     {
         powerUpList.Remove(powerUp);
         Destroy(powerUp);
     }
-
     public void RemoveAllPowerUp()
     {
         while (powerUpList.Count > 0)
@@ -99,4 +138,94 @@ public class PowerUpManager : MonoBehaviour
             RemovePowerUp(powerUpList[0]);
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // BARU GENERATE SCALE UP PADDLE
+    public void GenerateRandomScaleUpPaddle()
+    {
+        GenerateRandomScaleUpPaddle(new Vector2(Random.Range(powerUpAreaMin.x, powerUpAreaMax.x), Random.Range(powerUpAreaMin.y, powerUpAreaMax.y)));
+    }
+    private void GenerateRandomScaleUpPaddle(Vector2 position)
+    {
+        if(paddleScaleUpList.Count >= maxJumlahPoweUp)
+        {
+            return;
+        }
+
+        if(position.x < powerUpAreaMin.x || position.x > powerUpAreaMax.x || position.y < powerUpAreaMin.y || position.y > powerUpAreaMax.y)
+        {
+            return;
+        }
+
+        int randomIndexScaleUp = Random.Range(0, paddleScaleUpTemplateList.Count);
+        GameObject scaleUp = Instantiate(paddleScaleUpTemplateList[randomIndexScaleUp], new Vector3(position.x, position.y, paddleScaleUpTemplateList[randomIndexScaleUp].transform.position.z), Quaternion.identity, spawnArea);
+        scaleUp.SetActive(true);
+        paddleScaleUpList.Add(scaleUp);
+    }
+    public void RemoveScaleUpPaddle(GameObject scaleUp)
+    {
+        paddleScaleUpList.Remove(scaleUp);
+        Destroy(scaleUp);
+    }
+    public void RemoveAllScaleUpPaddle()
+    {
+        while (paddleScaleUpList.Count > 0)
+        {
+            RemoveScaleUpPaddle(paddleScaleUpList[0]);
+        }
+    }
+
+
+    // GENERATE RANDOM SPEEED UP PADDLE
+    public void GenerateRandomSpeedUpPaddle()
+    {
+        GenerateRandomSpeedUpPaddle(new Vector2(Random.Range(powerUpAreaMin.x, powerUpAreaMax.x), Random.Range(powerUpAreaMin.y, powerUpAreaMax.y)));
+    }
+    public void GenerateRandomSpeedUpPaddle(Vector2 position)
+    {
+        if(paddleSpeedUpList.Count > maxJumlahPoweUp)
+        {
+            return;
+        }
+        if(position.x < powerUpAreaMin.x || position.x > powerUpAreaMax.x || position.y < powerUpAreaMin.y || position.y > powerUpAreaMax.y)
+        {
+            return;
+        }
+
+        int randomIndexSpeedUp = Random.Range(0, paddleSpeedUpTemplateList.Count);
+        GameObject speedUp = Instantiate(paddleSpeedUpTemplateList[randomIndexSpeedUp], new Vector3(position.x, position.y, paddleSpeedUpTemplateList[randomIndexSpeedUp].transform.position.z), Quaternion.identity, spawnArea);
+        speedUp.SetActive(true);
+        paddleSpeedUpList.Add(speedUp);
+    }
+    public void RemoveSpeedUpPaddle(GameObject speedUp)
+    {
+        paddleSpeedUpList.Remove(speedUp);
+        Destroy(speedUp);
+    }
+    public void RemoveAllSpeedUpPaddle()
+    {
+        while(paddleSpeedUpList.Count > 0)
+        {
+            RemoveSpeedUpPaddle(paddleSpeedUpList[0]);
+        }
+    }
+
 }

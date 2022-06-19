@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenuController : MonoBehaviour
+public class CreditCanvasController : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -17,18 +17,8 @@ public class MainMenuController : MonoBehaviour
         
     }
 
-    public void PlayGame()
+    public void BackToMainMenu()
     {
-        SceneManager.LoadScene("PongGame");
-    }
-
-   public void OpenCredit()
-    {
-        SceneManager.LoadScene("Credit");
-    }
-
-    public void OpenAuthor()
-    {
-        Debug.Log("<color=green>created by Me</color>");
+        SceneManager.LoadScene("MainMenu");
     }
 }
