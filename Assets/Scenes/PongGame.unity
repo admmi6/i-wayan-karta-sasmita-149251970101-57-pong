@@ -227,8 +227,6 @@ MonoBehaviour:
   downKey: 274
   bola: {fileID: 1297733693}
   manager: {fileID: 1284876743}
-  scaleUpValue: 2
-  speedUpValue: 2
 --- !u!50 &193749640
 Rigidbody2D:
   serializedVersion: 4
@@ -462,8 +460,6 @@ MonoBehaviour:
   downKey: 115
   bola: {fileID: 1297733693}
   manager: {fileID: 1284876743}
-  scaleUpValue: 2
-  speedUpValue: 2
 --- !u!50 &291778771
 Rigidbody2D:
   serializedVersion: 4
@@ -1351,6 +1347,7 @@ MonoBehaviour:
   powerUpTemplateList:
   - {fileID: 1704021276}
   - {fileID: 728036134}
+  - {fileID: 2084115138}
   paddleScaleUpTemplateList: []
   paddleSpeedUpTemplateList: []
   spawnArea: {fileID: 1785386192}
