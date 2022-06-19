@@ -8,6 +8,8 @@ public class BallController : MonoBehaviour
     private Rigidbody2D rig;
     public Vector2 resetPosition;
 
+    public bool isRight;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +21,18 @@ public class BallController : MonoBehaviour
     void Update()
     {
       
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Paddle Kanan")
+        {
+            isRight = true;
+        }
+        if(collision.gameObject.tag == "Paddle Kiri")
+        {
+            isRight = false;
+        }
     }
 
     public void ResetBall()

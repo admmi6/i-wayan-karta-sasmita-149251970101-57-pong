@@ -5,9 +5,9 @@ using UnityEngine;
 public class PaddleScaleUpController : MonoBehaviour
 {
     public PowerUpManager manager;
+    public PaddleController padKiri;
+    public PaddleController padKanan;
     public Collider2D bola;
-
-    //public int newScalePaddleValue;
 
     // Start is called before the first frame update
     void Start()
@@ -25,10 +25,15 @@ public class PaddleScaleUpController : MonoBehaviour
     {
         if(collision == bola)
         {
-            if (manager.paddleLastHit)
+            if(bola.GetComponent<BallController>().isRight == true)
             {
-                manager.paddleLastHit.ScaleUpPaddle();
+                padKanan.GetComponent<PaddleController>().ScaleUpPaddle();
             }
+            if(bola.GetComponent<BallController>().isRight == false)
+            {
+                padKiri.GetComponent<PaddleController>().ScaleUpPaddle();
+            }
+
             manager.RemoveScaleUpPaddle(gameObject);
         }
     }

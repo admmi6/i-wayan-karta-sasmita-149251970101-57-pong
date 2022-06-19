@@ -8,8 +8,6 @@ public class PowerUpManager : MonoBehaviour
 {
     public int maxJumlahPoweUp;
 
-    public PaddleController paddleLastHit;
-
     // ball speed up
     private List<GameObject> powerUpList;
     public List<GameObject> powerUpTemplateList;
@@ -28,13 +26,11 @@ public class PowerUpManager : MonoBehaviour
     //[HideInInspector]
     public int spawnInterval;
     private int resetAllSpawnInterval;
-    private float durationPaddle = 5f;
-
+   
     //timer
     private float timerShowSpawn;
     private float timerResetAllSpawn;
-    private float timerPaddle;
-    
+        
     // Start is called before the first frame update
     void Start()
     {
@@ -74,34 +70,6 @@ public class PowerUpManager : MonoBehaviour
 
             timerResetAllSpawn -= resetAllSpawnInterval;
         }
-
-        if(paddleLastHit != null)
-        {
-            if (paddleLastHit.hasScaleUp == true)
-            {
-                timerPaddle += Time.deltaTime;
-                if (timerPaddle > durationPaddle)
-                {
-                    Debug.Log("HAS SCALE UP");
-                    paddleLastHit.SpeedDownPaddle();
-                    paddleLastHit.hasScaleUp = false;
-                    timerPaddle -= durationPaddle;
-                }
-            }
-
-            if(paddleLastHit.hasSpeedUp == true)
-            {
-                timerPaddle += Time.deltaTime;
-                if(timerPaddle > durationPaddle)
-                {
-                    Debug.Log("HAS SPEED UP");
-                    paddleLastHit.SpeedDownPaddle();
-                    paddleLastHit.hasSpeedUp = false;
-                    timerPaddle -= durationPaddle;
-                }
-            }
-        }
-
 
     }
 

@@ -7,14 +7,14 @@ public class PaddleSpeedUpController : MonoBehaviour
     [Header("CATATAN")]
 
     public PowerUpManager manager;
+    public PaddleController padKiri;
+    public PaddleController padKanan;
     public Collider2D bola;
-
-    //public int newSpeedPaddleValue;
 
     // Start is called before the first frame update
     void Start()
     {
-        //Debug.Log("Paddle speed up");
+
     }
 
     // Update is called once per frame
@@ -24,12 +24,17 @@ public class PaddleSpeedUpController : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision == bola)
+        if (collision == bola)
         {
-            if (manager.paddleLastHit)
+            if (bola.GetComponent<BallController>().isRight == true)
             {
-                manager.paddleLastHit.SpeedUpPaddle();
+                padKanan.GetComponent<PaddleController>().SpeedUpPaddle();
             }
+            if (bola.GetComponent<BallController>().isRight == false)
+            {
+                padKiri.GetComponent<PaddleController>().SpeedUpPaddle();
+            }
+
             manager.RemoveSpeedUpPaddle(gameObject);
         }
     }

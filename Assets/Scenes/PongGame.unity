@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 193749639}
   m_Layer: 0
   m_Name: Paddle Kanan
-  m_TagString: Untagged
+  m_TagString: Paddle Kanan
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -227,6 +227,8 @@ MonoBehaviour:
   downKey: 274
   bola: {fileID: 1297733693}
   manager: {fileID: 1284876743}
+  scaleUpValue: 2
+  speedUpValue: 2
 --- !u!50 &193749640
 Rigidbody2D:
   serializedVersion: 4
@@ -371,7 +373,7 @@ GameObject:
   - component: {fileID: 291778770}
   m_Layer: 0
   m_Name: Paddle Kiri
-  m_TagString: Untagged
+  m_TagString: Paddle Kiri
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -453,13 +455,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adaebd4bfed8288429ca9a18dee9c45d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 6
+  speed: 3
   hasScaleUp: 0
   hasSpeedUp: 0
   upKey: 119
   downKey: 115
   bola: {fileID: 1297733693}
   manager: {fileID: 1284876743}
+  scaleUpValue: 2
+  speedUpValue: 2
 --- !u!50 &291778771
 Rigidbody2D:
   serializedVersion: 4
@@ -766,6 +770,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 1284876743}
+  padKiri: {fileID: 291778770}
+  padKanan: {fileID: 193749639}
   bola: {fileID: 1297733693}
 --- !u!58 &728036138
 CircleCollider2D:
@@ -1342,7 +1348,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxJumlahPoweUp: 2
-  paddleLastHit: {fileID: 0}
   powerUpTemplateList:
   - {fileID: 1704021276}
   - {fileID: 728036134}
@@ -1451,6 +1456,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: {x: 5, y: 0}
   resetPosition: {x: 0, y: 0}
+  isRight: 0
 --- !u!50 &1297733692
 Rigidbody2D:
   serializedVersion: 4
@@ -2089,8 +2095,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1704021277}
   - component: {fileID: 1704021279}
-  - component: {fileID: 1704021278}
   - component: {fileID: 1704021280}
+  - component: {fileID: 1704021278}
   m_Layer: 0
   m_Name: Speed Up
   m_TagString: Untagged
@@ -2333,6 +2339,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 1284876743}
+  padKiri: {fileID: 291778770}
+  padKanan: {fileID: 193749639}
   bola: {fileID: 1297733693}
 --- !u!58 &2084115142
 CircleCollider2D:
