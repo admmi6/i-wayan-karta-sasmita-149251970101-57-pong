@@ -15,10 +15,10 @@ public class SpeedUpController : MonoBehaviour
     void Start()
     {
         // STARTIING POINT RESET ALL SPAWN DISINI
-        if(bolaRig.velocity.x > bolaSpeed.speed.x || bolaRig.velocity.x < -bolaSpeed.speed.x)
+        /*if(bolaRig.velocity.x > bolaSpeed.speed.x || bolaRig.velocity.x < -bolaSpeed.speed.x)
         {
             bola.GetComponent<BallController>().ResetSpeed(magnitude);
-        }
+        }*/
     }
     // Update is called once per frame
     void Update()

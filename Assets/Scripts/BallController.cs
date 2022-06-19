@@ -4,23 +4,40 @@ using UnityEngine;
 
 public class BallController : MonoBehaviour
 {
-    public Vector2 speed;
-    private Rigidbody2D rig;
-    public Vector2 resetPosition;
-
     public bool isRight;
+    public bool hasSpeedUp = false;
+
+    public Vector2 speed;
+    public Vector2 resetPosition;
+    private Rigidbody2D rig;
+
+    public float durationSpeedUpBall = 5f;
+    private float timerSpeedUpBall;
+
+    public float newMagnitude;
 
     // Start is called before the first frame update
     void Start()
     {
         rig = GetComponent<Rigidbody2D>();
         rig.velocity = speed;
+        timerSpeedUpBall = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-      
+      if(hasSpeedUp == true)
+        {
+            timerSpeedUpBall += Time.deltaTime;
+            if(timerSpeedUpBall > durationSpeedUpBall)
+            {
+                ResetSpeed(newMagnitude);
+                hasSpeedUp = false;
+                timerSpeedUpBall = 0;
+            }
+        }
+        
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
@@ -43,10 +60,13 @@ public class BallController : MonoBehaviour
     public void ActiveSpeedUp(float magnitude)
     {
         rig.velocity *= magnitude;
+        hasSpeedUp = true;
+        newMagnitude = magnitude;
     }
 
     public void ResetSpeed(float magnitude)
     {
         rig.velocity /= magnitude;
+        hasSpeedUp = false;
     }
 }
