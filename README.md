@@ -15,4 +15,4 @@ Project Keempat - Pong Seed Up
 
 Project Kelima - Paddle Scale - Speed Up
 
-![img pong speed up](img-paddle-scale-speed-up.jpg "Paddle Scale Speed Up")
+![img pong speed up](img-paddle-scale-speed.jpg "Paddle Scale Speed Up")
